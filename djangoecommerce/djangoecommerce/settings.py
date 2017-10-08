@@ -11,10 +11,14 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# BASE_DIR é relativo ao diretorio raiz
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# PROJECT_ROOT é relativo ao arquivo settings
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -120,3 +124,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# estas configurações são para que minhas configurações de banco de
+# dados sejam substituidas pelas que o heroku quer usar (ele usa o Postgresql)
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['defaut'].update(db_from_env)
+
+# Procurar por que o heroku pede que use isso aqui
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
+
+# configuração dos dominios que terão acesso a esta aplicação
+ALLOWED_HOSTS = ['*']
+
+# Static files (CSS, JavaScript, Images)
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
