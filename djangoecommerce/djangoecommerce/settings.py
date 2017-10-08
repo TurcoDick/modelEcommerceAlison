@@ -128,7 +128,8 @@ STATIC_URL = '/static/'
 # estas configurações são para que minhas configurações de banco de
 # dados sejam substituidas pelas que o heroku quer usar (ele usa o Postgresql)
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['defaut'].update(db_from_env)
+
+DATABASES['default'].update(db_from_env)
 
 # Procurar por que o heroku pede que use isso aqui
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
