@@ -1,0 +1,8 @@
+# este arquivo mostra oque deve estar somente no ambiente de desenvolvimento
+target/
+
+#Ipython Notebook
+.ipynb_checkpoints
+db.sqlite3
+
+local_settings.py
